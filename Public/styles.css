@@ -1,0 +1,9 @@
+body{
+    
+    text-align: center;
+}
+.container{
+    border:10px solid black;
+    width: 50%;
+    border-radius: 10px;
+}

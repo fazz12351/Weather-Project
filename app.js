@@ -1,7 +1,13 @@
 const express = require("express");
 const bodyParser=require("body-parser")
+const ejs=require("ejs")
 const https = require("https");
+const exp = require("constants");
 const app = express();
+app.use(express.static("Public"))
+
+app.set("view engine","ejs")
+
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -11,9 +17,6 @@ app.use(bodyParser.urlencoded({
 app.get("/",function(req,res){
     res.sendFile(__dirname+"/index.html")
 })
-
-
-
 
 app.post("/", function (req, res) {
 
@@ -29,12 +32,16 @@ app.post("/", function (req, res) {
             const weatherDescription = weatherData.weather[0].description;
             const icon = weatherData.weather[0].icon;
             const iconURL = "https://openweathermap.org/img/wn/" + icon + "@2x.png"
+            console.log(icon)
 
             
-            res.write("<h1 style='text-align: center;'>The current weather in "+ location+" is "+weatherDescription+" with a <br>tempreture of <em>"+temp+" degrees Celcius</em></h1>")
-            res.write("<p style='text-align: center;'> <img src='https://openweathermap.org/img/wn/"+icon+"@2x.png' alt=''></p>")
+            // res.write("<h1 style='text-align: center;'>The current weather in "+ location+" is "+weatherDescription+" with a <br>tempreture of <em>"+temp+" degrees Celcius</em></h1>")
+            // res.write("<p style='text-align: center;'> <img src='https://openweathermap.org/img/wn/"+icon+"@2x.png' alt=''></p>")
 
-            res.send();
+            // res.send();
+            res.render("dynamic",{
+
+            })
 
         })
     })
